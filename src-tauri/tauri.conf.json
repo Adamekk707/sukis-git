@@ -12,9 +12,9 @@
   "app": {
     "windows": [
       {
-        "title": "sukis-git",
-        "width": 800,
-        "height": 600
+        "title": "すきすぎっ",
+        "width": 1200,
+        "height": 800
       }
     ],
     "security": {

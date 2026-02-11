@@ -1,50 +1,55 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
+import { useStore } from "@nanostores/react";
+import * as R from "ramda";
+import { RepositoryProvider, useRepository } from "./context/RepositoryContext";
+import { AppShell } from "./components/layout/AppShell";
+import { useCommitLog } from "./hooks/useCommitLog";
+import { messages } from "./i18n";
 import "./App.css";
 
-function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+function MainContent() {
+  const t = useStore(messages);
+  const { selectedRepoPath } = useRepository();
+  const { commits, hasMore, isLoading } = useCommitLog(selectedRepoPath);
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
-
-  return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
-
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  return R.cond([
+    [() => R.isNil(selectedRepoPath), () => (
+      <div className="empty-state">
+        <p>{R.pathOr("No data available", ["common", "noData"], t)}</p>
       </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
+    )],
+    [() => isLoading, () => (
+      <div className="loading-state">
+        <p>{R.pathOr("Loading...", ["common", "loading"], t)}</p>
+      </div>
+    )],
+    [R.T, () => (
+      <div className="commit-list">
+        <h2>{R.pathOr("Commit Log", ["commits", "log"], t)}</h2>
+        {R.ifElse(
+          R.isEmpty,
+          () => <p>{R.pathOr("No commits found", ["commits", "noCommits"], t)}</p>,
+          R.map((commit) => (
+            <div key={R.prop("oid", commit)} className="commit-item">
+              <span className="commit-oid">{R.prop("short_oid", commit)}</span>
+              <span className="commit-message">
+                {R.pipe(R.prop("message"), R.split("\n"), R.head)(commit)}
+              </span>
+              <span className="commit-author">{R.prop("author_name", commit)}</span>
+            </div>
+          )),
+        )(commits)}
+      </div>
+    )],
+  ])();
+}
 
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-    </main>
+function App() {
+  return (
+    <RepositoryProvider>
+      <AppShell>
+        <MainContent />
+      </AppShell>
+    </RepositoryProvider>
   );
 }
 

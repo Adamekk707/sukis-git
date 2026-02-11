@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:v2.tauri.app)",
+      "WebFetch(domain:docs.rs)",
+      "WebFetch(domain:reactflow.dev)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(cargo tree:*)",
+      "Bash(cargo check:*)",
+      "Bash(cargo add:*)",
+      "Bash(cargo test:*)",
+      "Bash(cargo clippy:*)",
+      "Bash(bun run build:*)",
+      "Bash(bun add:*)"
+    ]
+  }
+}
