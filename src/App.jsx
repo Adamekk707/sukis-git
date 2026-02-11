@@ -4,7 +4,6 @@ import { RepositoryProvider, useRepository } from "./context/RepositoryContext";
 import { AppShell } from "./components/layout/AppShell";
 import { DagView } from "./components/dag/DagView";
 import { messages } from "./i18n";
-import "@xyflow/react/dist/style.css";
 import "./styles/dag.css";
 import "./App.css";
 

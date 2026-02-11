@@ -7,7 +7,7 @@ import { useRepository } from "../../context/RepositoryContext";
 import { useCommitDag } from "../../hooks/useCommitDag";
 import { useResizeHandle } from "../../hooks/useResizeHandle";
 import { messages } from "../../i18n";
-import { CommitGraphCanvas } from "./CommitGraphCanvas";
+import { CommitListTable } from "./CommitListTable";
 import { CommitDetailPanel } from "./CommitDetailPanel";
 
 const DEFAULT_DETAIL_HEIGHT = 300;
@@ -43,7 +43,7 @@ export function DagView() {
     [R.T, () => (
       <div className="dag-view" ref={containerRef}>
         <div className="dag-graph-area">
-          <CommitGraphCanvas dagNodes={nodes} dagEdges={edges} />
+          <CommitListTable dagNodes={nodes} dagEdges={edges} />
         </div>
         {hasDetail && (
           <>

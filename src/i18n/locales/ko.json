@@ -32,7 +32,11 @@
     "dag": {
       "graphView": "커밋 그래프",
       "noSelection": "커밋을 클릭하여 상세 정보를 확인하세요",
-      "closeDetail": "닫기"
+      "closeDetail": "닫기",
+      "colDescription": "설명",
+      "colAuthor": "작성자",
+      "colDate": "날짜",
+      "colHash": "해시"
     }
   }
 }

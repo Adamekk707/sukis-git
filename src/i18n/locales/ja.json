@@ -32,7 +32,11 @@
     "dag": {
       "graphView": "コミットグラフ",
       "noSelection": "コミットをクリックして詳細を確認",
-      "closeDetail": "閉じる"
+      "closeDetail": "閉じる",
+      "colDescription": "説明",
+      "colAuthor": "作成者",
+      "colDate": "日付",
+      "colHash": "ハッシュ"
     }
   }
 }

@@ -45,5 +45,9 @@ export const messages = i18n("app", {
     graphView: "Commit Graph",
     noSelection: "Click a commit to view details",
     closeDetail: "Close",
+    colDescription: "Description",
+    colAuthor: "Author",
+    colDate: "Date",
+    colHash: "Hash",
   },
 });
