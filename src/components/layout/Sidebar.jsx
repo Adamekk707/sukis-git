@@ -17,7 +17,7 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="sidebar">
+    <>
       <section className="sidebar-section">
         <h2 className="sidebar-section-title">
           {R.pathOr("USB Devices", ["sidebar", "devices"], t)}
@@ -107,6 +107,6 @@ export function Sidebar() {
           </>
         ),
       )(selectedRepoPath)}
-    </aside>
+    </>
   );
 }

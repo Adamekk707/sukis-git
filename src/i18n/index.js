@@ -7,7 +7,7 @@ export const locale = localeFrom(localeSettingAtom, browser({ available: ["en", 
 
 export const i18n = createI18n(locale, {
   async get(code) {
-    return import(`./locales/${code}.json`);
+    return (await import(`./locales/${code}.json`)).default;
   },
 });
 
@@ -40,5 +40,10 @@ export const messages = i18n("app", {
     unified: "Unified",
     split: "Split",
     noDiff: "No changes",
+  },
+  dag: {
+    graphView: "Commit Graph",
+    noSelection: "Click a commit to view details",
+    closeDetail: "Close",
   },
 });

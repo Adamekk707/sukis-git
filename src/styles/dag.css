@@ -1,0 +1,208 @@
+.diff {
+  --diff-background-color: var(--color-bg-primary);
+  --diff-text-color: var(--color-text-primary);
+  --diff-font-family: var(--font-mono);
+  --diff-selection-background-color: var(--color-accent);
+  --diff-selection-text-color: #fff;
+  --diff-gutter-insert-background-color: var(--color-diff-add-bg);
+  --diff-gutter-insert-text-color: var(--color-diff-add-text);
+  --diff-gutter-delete-background-color: var(--color-diff-del-bg);
+  --diff-gutter-delete-text-color: var(--color-diff-del-text);
+  --diff-code-insert-background-color: var(--color-diff-add-bg);
+  --diff-code-insert-text-color: var(--color-text-primary);
+  --diff-code-delete-background-color: var(--color-diff-del-bg);
+  --diff-code-delete-text-color: var(--color-text-primary);
+  --diff-code-insert-edit-background-color: var(--color-diff-add-text);
+  --diff-code-insert-edit-text-color: #fff;
+  --diff-code-delete-edit-background-color: var(--color-diff-del-text);
+  --diff-code-delete-edit-text-color: #fff;
+  font-size: var(--font-size-sm);
+}
+
+.dag-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.dag-graph-area {
+  flex: 1;
+  min-height: 120px;
+  overflow: hidden;
+}
+
+.dag-detail-area {
+  min-height: 120px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.commit-node {
+  width: 200px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-primary);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.commit-node:hover {
+  border-color: var(--color-accent);
+}
+
+.commit-node-selected {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.25);
+}
+
+.commit-node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.commit-node-oid {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.commit-node-author {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 80px;
+}
+
+.commit-node-message {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.commit-node-refs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 4px;
+}
+
+.ref-badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.ref-badge-branch {
+  background-color: var(--color-branch);
+  color: #fff;
+}
+
+.ref-badge-tag {
+  background-color: var(--color-tag);
+  color: #fff;
+}
+
+.ref-badge-remote {
+  background-color: var(--color-remote);
+  color: #fff;
+}
+
+.commit-handle {
+  width: 6px !important;
+  height: 6px !important;
+  background: var(--color-border) !important;
+  border: none !important;
+}
+
+.commit-detail-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.commit-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--color-border-light);
+  background-color: var(--color-bg-secondary);
+  flex-shrink: 0;
+}
+
+.commit-detail-oid {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.commit-detail-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  line-height: 1;
+}
+
+.commit-detail-close:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.commit-detail-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.diff-file {
+  margin-bottom: 16px;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.diff-file-header {
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  background-color: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border-light);
+  font-weight: 500;
+}
+
+.diff-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.dag-loading,
+.dag-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-text-muted);
+}
