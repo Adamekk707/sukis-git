@@ -36,7 +36,9 @@
       "colDescription": "Description",
       "colAuthor": "Author",
       "colDate": "Date",
-      "colHash": "Hash"
+      "colHash": "Hash",
+      "copyHash": "Copy hash",
+      "copiedHash": "Copied!"
     }
   }
 }

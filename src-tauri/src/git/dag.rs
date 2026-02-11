@@ -27,6 +27,7 @@ fn parse_author_info(raw: &str) -> (String, i64) {
 pub fn build_commit_dag(
     repo_path: &Path,
     max_commits: usize,
+    branch_oid: Option<&str>,
 ) -> Result<CommitDag, AppError> {
     let repo = open_bare_repo(repo_path)?;
     let refs = list_refs(repo_path)?;
@@ -39,10 +40,17 @@ pub fn build_commit_dag(
             .push(r.clone());
     }
 
-    let tip_oids: Vec<ObjectId> = refs
-        .iter()
-        .filter_map(|r| ObjectId::from_hex(r.target_oid.as_bytes()).ok())
-        .collect();
+    let tip_oids: Vec<ObjectId> = match branch_oid {
+        Some(oid) => {
+            let id = ObjectId::from_hex(oid.as_bytes())
+                .map_err(|e| AppError::Git(e.to_string()))?;
+            vec![id]
+        }
+        None => refs
+            .iter()
+            .filter_map(|r| ObjectId::from_hex(r.target_oid.as_bytes()).ok())
+            .collect(),
+    };
 
     if tip_oids.is_empty() {
         return Ok(CommitDag {

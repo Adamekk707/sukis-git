@@ -36,7 +36,9 @@
       "colDescription": "설명",
       "colAuthor": "작성자",
       "colDate": "날짜",
-      "colHash": "해시"
+      "colHash": "해시",
+      "copyHash": "해시 복사",
+      "copiedHash": "복사됨!"
     }
   }
 }

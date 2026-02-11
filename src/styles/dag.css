@@ -88,7 +88,7 @@
 }
 
 .commit-list-header-oid {
-  width: 70px;
+  width: 90px;
   flex-shrink: 0;
   padding: 0 8px;
 }
@@ -169,12 +169,48 @@
 }
 
 .commit-row-oid {
-  width: 70px;
+  width: 90px;
   flex-shrink: 0;
   padding: 0 8px;
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
   color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.copy-oid-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.copy-oid-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-accent);
+}
+
+.copy-oid-btn-copied {
+  color: var(--color-diff-add-text);
+}
+
+.commit-row .copy-oid-btn {
+  opacity: 0;
+}
+
+.commit-row:hover .copy-oid-btn {
+  opacity: 1;
 }
 
 .ref-badge {
@@ -223,6 +259,9 @@
   font-size: var(--font-size-sm);
   color: var(--color-accent);
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .commit-detail-close {

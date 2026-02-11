@@ -51,10 +51,11 @@ pub async fn list_refs(repo_path: String) -> Result<Vec<RefInfo>, String> {
 pub async fn get_commit_dag(
     repo_path: String,
     max_commits: Option<usize>,
+    branch_oid: Option<String>,
 ) -> Result<CommitDag, String> {
     let path = PathBuf::from(&repo_path);
     let max = max_commits.unwrap_or(200);
-    dag::build_commit_dag(&path, max).map_err(|e| e.to_string())
+    dag::build_commit_dag(&path, max, branch_oid.as_deref()).map_err(|e| e.to_string())
 }
 
 #[tauri::command]

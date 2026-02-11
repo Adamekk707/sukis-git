@@ -14,8 +14,9 @@ const DEFAULT_DETAIL_HEIGHT = 300;
 
 export function DagView() {
   const t = useStore(messages);
-  const { selectedRepoPath } = useRepository();
-  const { nodes, edges, isLoading, error } = useCommitDag(selectedRepoPath);
+  const { selectedRepoPath, selectedRef } = useRepository();
+  const branchOid = R.prop("target_oid", selectedRef);
+  const { nodes, edges, isLoading, error } = useCommitDag(selectedRepoPath, 200, branchOid);
   const selectedOid = useAtomValue(selectedCommitOidAtom);
 
   const containerRef = useRef(null);

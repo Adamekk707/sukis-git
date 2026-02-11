@@ -36,7 +36,9 @@
       "colDescription": "説明",
       "colAuthor": "作成者",
       "colDate": "日付",
-      "colHash": "ハッシュ"
+      "colHash": "ハッシュ",
+      "copyHash": "ハッシュをコピー",
+      "copiedHash": "コピーしました！"
     }
   }
 }

@@ -209,6 +209,15 @@
   background-color: var(--color-bg-hover);
 }
 
+.ref-btn-active {
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.ref-btn-active:hover {
+  background-color: var(--color-accent-hover);
+}
+
 .branch-btn::before {
   content: "";
   display: inline-block;
