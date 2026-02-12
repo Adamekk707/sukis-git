@@ -9,3 +9,5 @@ export const diffViewTypeAtom = atom("unified");
 export const activeModalAtom = atom(null);
 
 export const cloneModalRepoAtom = atom(null);
+
+export const addRepoModalOpenAtom = atom(false);

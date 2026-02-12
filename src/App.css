@@ -108,6 +108,35 @@
   border-bottom: 1px solid var(--color-border-light);
 }
 
+.sidebar-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.sidebar-section-header .sidebar-section-title {
+  margin-bottom: 0;
+}
+
+.sidebar-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  line-height: 1;
+}
+
+.sidebar-add-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-accent);
+}
+
 .sidebar-section-title {
   font-size: var(--font-size-sm);
   font-weight: 600;
@@ -510,3 +539,23 @@
   background-color: var(--color-bg-hover);
   color: var(--color-accent);
 }
+
+/* Add Repo Modal */
+.add-repo-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}
+
+.add-repo-badge-git {
+  background-color: rgba(56, 139, 253, 0.15);
+  color: #58a6ff;
+}
+
+.add-repo-badge-plain {
+  background-color: rgba(210, 153, 34, 0.15);
+  color: #d29922;
+}
+

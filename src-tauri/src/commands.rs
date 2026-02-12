@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
-use crate::git::{clone, dag, diff, log, refs, repository};
-use crate::types::{CloneResult, CommitDag, CommitInfo, CommitLogPage, RefInfo, RepositoryInfo, UsbDevice};
+use crate::git::{clone, dag, diff, init, log, refs, repository};
+use crate::types::{AddRepoResult, CloneResult, CommitDag, CommitInfo, CommitLogPage, RefInfo, RepositoryInfo, SourceDetection, UsbDevice};
 use crate::usb::detect;
 
 #[tauri::command]
@@ -82,6 +82,45 @@ pub async fn list_usb_devices() -> Result<Vec<UsbDevice>, String> {
 #[tauri::command]
 pub async fn scan_usb_device(mount_point: String) -> Result<UsbDevice, String> {
     detect::scan_device_for_repos(&mount_point).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+pub async fn detect_source_directory(source_path: String) -> Result<SourceDetection, String> {
+    let path = PathBuf::from(&source_path);
+    if !path.exists() {
+        return Err(format!("Path does not exist: {source_path}"));
+    }
+    if !path.is_dir() {
+        return Err(format!("Path is not a directory: {source_path}"));
+    }
+
+    let source_type = init::detect_source_type(&path);
+    let suggested_name = init::suggest_repo_name(&path);
+
+    Ok(SourceDetection {
+        is_git_repo: matches!(source_type, init::SourceType::GitRepo),
+        suggested_name,
+        source_path,
+    })
+}
+
+#[tauri::command]
+pub async fn add_repository_to_usb(
+    source_path: String,
+    destination_dir: String,
+    repo_name: String,
+) -> Result<AddRepoResult, String> {
+    let source = PathBuf::from(&source_path);
+    let dest = PathBuf::from(&destination_dir);
+
+    match init::detect_source_type(&source) {
+        init::SourceType::GitRepo => {
+            init::fork_repo_as_bare(&source, &dest, &repo_name).map_err(|e| e.to_string())
+        }
+        init::SourceType::PlainDirectory => {
+            init::init_bare_from_directory(&source, &dest, &repo_name).map_err(|e| e.to_string())
+        }
+    }
 }
 
 #[tauri::command]

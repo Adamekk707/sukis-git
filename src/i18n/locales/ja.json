@@ -52,6 +52,25 @@
       "errorTitle": "エラー",
       "retry": "再試行",
       "close": "閉じる"
+    },
+    "addRepo": {
+      "title": "USBにリポジトリを追加",
+      "sourceLabel": "ソースディレクトリ",
+      "pickSource": "フォルダ選択",
+      "repoNameLabel": "リポジトリ名",
+      "destinationLabel": "宛先ディレクトリ",
+      "pickDestination": "フォルダ選択",
+      "badgeGitRepo": "Gitリポジトリ（フォーク）",
+      "badgePlainDir": "通常ディレクトリ（新規リポジトリ）",
+      "detecting": "検出中...",
+      "forkAction": "USBにフォーク",
+      "createAction": "USBに作成",
+      "adding": "追加中...",
+      "success": "追加完了！",
+      "addedTo": "追加先:",
+      "errorTitle": "エラー",
+      "retry": "再試行",
+      "close": "閉じる"
     }
   }
 }

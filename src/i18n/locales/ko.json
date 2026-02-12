@@ -52,6 +52,25 @@
       "errorTitle": "오류",
       "retry": "재시도",
       "close": "닫기"
+    },
+    "addRepo": {
+      "title": "USB에 리포지토리 추가",
+      "sourceLabel": "소스 디렉토리",
+      "pickSource": "폴더 선택",
+      "repoNameLabel": "리포지토리 이름",
+      "destinationLabel": "대상 디렉토리",
+      "pickDestination": "폴더 선택",
+      "badgeGitRepo": "Git 리포지토리 (포크)",
+      "badgePlainDir": "일반 디렉토리 (새 리포지토리)",
+      "detecting": "감지 중...",
+      "forkAction": "USB로 포크",
+      "createAction": "USB에 생성",
+      "adding": "추가 중...",
+      "success": "추가 완료!",
+      "addedTo": "추가 위치:",
+      "errorTitle": "오류",
+      "retry": "재시도",
+      "close": "닫기"
     }
   }
 }

@@ -75,6 +75,21 @@ pub struct CloneResult {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AddRepoResult {
+    pub source_path: String,
+    pub destination_path: String,
+    pub repo_name: String,
+    pub is_fork: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SourceDetection {
+    pub is_git_repo: bool,
+    pub suggested_name: String,
+    pub source_path: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UsbDevice {
     pub label: String,
     pub mount_point: String,

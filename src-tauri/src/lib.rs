@@ -28,6 +28,8 @@ pub fn run() {
             list_usb_devices,
             scan_usb_device,
             clone_repository,
+            detect_source_directory,
+            add_repository_to_usb,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

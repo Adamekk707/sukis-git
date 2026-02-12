@@ -4,6 +4,7 @@ import { RepositoryProvider, useRepository } from "./context/RepositoryContext";
 import { AppShell } from "./components/layout/AppShell";
 import { DagView } from "./components/dag/DagView";
 import { CloneModal } from "./components/clone/CloneModal";
+import { AddRepoModal } from "./components/clone/AddRepoModal";
 import { messages } from "./i18n";
 import "./styles/dag.css";
 import "./App.css";
@@ -30,6 +31,7 @@ function App() {
         <MainContent />
       </AppShell>
       <CloneModal />
+      <AddRepoModal />
     </RepositoryProvider>
   );
 }

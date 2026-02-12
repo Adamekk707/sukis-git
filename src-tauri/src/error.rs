@@ -7,6 +7,7 @@ pub enum AppError {
     Path(String),
     Usb(String),
     Clone(String),
+    Init(String),
 }
 
 impl fmt::Display for AppError {
@@ -17,6 +18,7 @@ impl fmt::Display for AppError {
             AppError::Path(msg) => write!(f, "Path error: {msg}"),
             AppError::Usb(msg) => write!(f, "USB error: {msg}"),
             AppError::Clone(msg) => write!(f, "Clone error: {msg}"),
+            AppError::Init(msg) => write!(f, "Init error: {msg}"),
         }
     }
 }
