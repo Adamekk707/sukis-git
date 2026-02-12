@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
-use crate::git::{dag, diff, log, refs, repository};
-use crate::types::{CommitDag, CommitInfo, CommitLogPage, RefInfo, RepositoryInfo, UsbDevice};
+use crate::git::{clone, dag, diff, log, refs, repository};
+use crate::types::{CloneResult, CommitDag, CommitInfo, CommitLogPage, RefInfo, RepositoryInfo, UsbDevice};
 use crate::usb::detect;
 
 #[tauri::command]
@@ -82,4 +82,15 @@ pub async fn list_usb_devices() -> Result<Vec<UsbDevice>, String> {
 #[tauri::command]
 pub async fn scan_usb_device(mount_point: String) -> Result<UsbDevice, String> {
     detect::scan_device_for_repos(&mount_point).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+pub async fn clone_repository(
+    source_path: String,
+    destination_dir: String,
+    repo_name: Option<String>,
+) -> Result<CloneResult, String> {
+    let source = PathBuf::from(&source_path);
+    let dest = PathBuf::from(&destination_dir);
+    clone::clone_bare_to_local(&source, &dest, repo_name.as_deref()).map_err(|e| e.to_string())
 }

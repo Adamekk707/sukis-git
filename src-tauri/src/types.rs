@@ -68,6 +68,13 @@ pub struct CommitLogPage {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CloneResult {
+    pub source_path: String,
+    pub destination_path: String,
+    pub repo_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UsbDevice {
     pub label: String,
     pub mount_point: String,

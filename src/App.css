@@ -288,3 +288,225 @@
   color: var(--color-text-muted);
   flex-shrink: 0;
 }
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-lg, 8px);
+  border: 1px solid var(--color-border);
+  width: 480px;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.modal-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin: 0;
+}
+
+.modal-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  font-size: 18px;
+  color: var(--color-text-secondary);
+}
+
+.modal-close-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* Clone Modal */
+.clone-field {
+  margin-bottom: 16px;
+}
+
+.clone-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+
+.clone-source-path {
+  padding: 8px 12px;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  word-break: break-all;
+}
+
+.clone-destination-picker {
+  display: flex;
+  gap: 8px;
+}
+
+.clone-destination-input {
+  flex: 1;
+  padding: 8px 12px;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.clone-pick-btn {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-hover);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+
+.clone-pick-btn:hover {
+  background-color: var(--color-border-light);
+}
+
+.clone-actions {
+  margin-bottom: 16px;
+}
+
+.clone-action-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.clone-action-btn:hover:not(:disabled) {
+  background-color: var(--color-accent-hover);
+}
+
+.clone-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clone-status {
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.clone-status-cloning {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+}
+
+.clone-status-success {
+  background-color: rgba(46, 160, 67, 0.15);
+  color: #3fb950;
+}
+
+.clone-status-error {
+  background-color: rgba(248, 81, 73, 0.15);
+  color: #f85149;
+}
+
+.clone-status-icon {
+  font-weight: 700;
+}
+
+.clone-result-path {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  margin-top: 4px;
+}
+
+.clone-retry-btn {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  background-color: rgba(248, 81, 73, 0.2);
+}
+
+.clone-retry-btn:hover {
+  background-color: rgba(248, 81, 73, 0.3);
+}
+
+.clone-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-border-light);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Repo item row with clone button */
+.repo-item-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.repo-item-row .repo-item {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.repo-clone-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+}
+
+.repo-clone-btn:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-accent);
+}

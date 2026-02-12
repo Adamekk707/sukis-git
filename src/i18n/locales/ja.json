@@ -39,6 +39,19 @@
       "colHash": "ハッシュ",
       "copyHash": "ハッシュをコピー",
       "copiedHash": "コピーしました！"
+    },
+    "clone": {
+      "title": "リポジトリのクローン",
+      "sourceLabel": "ソース",
+      "destinationLabel": "宛先",
+      "pickDirectory": "フォルダ選択",
+      "cloneAction": "クローン",
+      "cloning": "クローン中...",
+      "success": "クローン完了！",
+      "clonedTo": "クローン先:",
+      "errorTitle": "エラー",
+      "retry": "再試行",
+      "close": "閉じる"
     }
   }
 }

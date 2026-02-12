@@ -6,6 +6,7 @@ pub enum AppError {
     Io(std::io::Error),
     Path(String),
     Usb(String),
+    Clone(String),
 }
 
 impl fmt::Display for AppError {
@@ -15,6 +16,7 @@ impl fmt::Display for AppError {
             AppError::Io(err) => write!(f, "IO error: {err}"),
             AppError::Path(msg) => write!(f, "Path error: {msg}"),
             AppError::Usb(msg) => write!(f, "USB error: {msg}"),
+            AppError::Clone(msg) => write!(f, "Clone error: {msg}"),
         }
     }
 }

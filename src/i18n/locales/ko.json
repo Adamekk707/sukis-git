@@ -39,6 +39,19 @@
       "colHash": "해시",
       "copyHash": "해시 복사",
       "copiedHash": "복사됨!"
+    },
+    "clone": {
+      "title": "리포지토리 복제",
+      "sourceLabel": "원본",
+      "destinationLabel": "대상",
+      "pickDirectory": "폴더 선택",
+      "cloneAction": "복제",
+      "cloning": "복제 중...",
+      "success": "복제 완료!",
+      "clonedTo": "복제 위치:",
+      "errorTitle": "오류",
+      "retry": "재시도",
+      "close": "닫기"
     }
   }
 }

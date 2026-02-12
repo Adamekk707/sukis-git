@@ -12,7 +12,8 @@
       "Bash(cargo test:*)",
       "Bash(cargo clippy:*)",
       "Bash(bun run build:*)",
-      "Bash(bun add:*)"
+      "Bash(bun add:*)",
+      "WebFetch(domain:github.com)"
     ]
   }
 }

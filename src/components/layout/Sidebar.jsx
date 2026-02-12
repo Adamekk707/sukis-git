@@ -1,13 +1,16 @@
 import { useStore } from "@nanostores/react";
+import { useSetAtom } from "jotai";
 import * as R from "ramda";
 import { useUsbDevices } from "../../hooks/useUsbDevices";
 import { useRefs } from "../../hooks/useRefs";
 import { useRepository } from "../../context/RepositoryContext";
 import { DeviceList } from "../usb/DeviceList";
+import { cloneModalRepoAtom } from "../../atoms/uiAtoms";
 import { messages } from "../../i18n";
 
 export function Sidebar() {
   const t = useStore(messages);
+  const setCloneModalRepo = useSetAtom(cloneModalRepoAtom);
   const { devices, isLoading: devicesLoading, scanDevice } = useUsbDevices();
   const { selectedRepoPath, selectedRef, selectRepository, selectRef } = useRepository();
   const { branches, tags, isLoading: refsLoading } = useRefs(selectedRepoPath);
@@ -33,6 +36,7 @@ export function Sidebar() {
           isLoading={devicesLoading}
           onScanDevice={scanDevice}
           onSelectRepository={handleSelectRepository}
+          onCloneRepository={setCloneModalRepo}
         />
       </section>
 

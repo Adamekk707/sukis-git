@@ -1,3 +1,4 @@
+pub mod clone;
 pub mod dag;
 pub mod diff;
 pub mod log;

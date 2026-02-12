@@ -7,3 +7,5 @@ export const selectedCommitOidAtom = atom(null);
 export const diffViewTypeAtom = atom("unified");
 
 export const activeModalAtom = atom(null);
+
+export const cloneModalRepoAtom = atom(null);

@@ -50,4 +50,17 @@ export const messages = i18n("app", {
     colDate: "Date",
     colHash: "Hash",
   },
+  clone: {
+    title: "Clone Repository",
+    sourceLabel: "Source",
+    destinationLabel: "Destination",
+    pickDirectory: "Browse",
+    cloneAction: "Clone",
+    cloning: "Cloning...",
+    success: "Clone complete!",
+    clonedTo: "Cloned to:",
+    errorTitle: "Error",
+    retry: "Retry",
+    close: "Close",
+  },
 });
