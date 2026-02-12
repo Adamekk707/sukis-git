@@ -62,6 +62,8 @@ pub fn fork_repo_as_bare(
         .fetch_only(Discard, &gix::interrupt::IS_INTERRUPTED)
         .map_err(|e| AppError::Init(e.to_string()))?;
 
+    add_remote_to_repo(source, &dest_path)?;
+
     Ok(AddRepoResult {
         source_path: source.to_string_lossy().to_string(),
         destination_path: dest_path.to_string_lossy().to_string(),
@@ -88,11 +90,6 @@ pub fn init_bare_from_directory(
         )));
     }
 
-    let repo = gix::init_bare(&dest_path)
-        .map_err(|e| AppError::Init(e.to_string()))?;
-
-    let tree_id = write_directory_as_tree(&repo, source)?;
-
     let timestamp = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap_or_default()
@@ -105,17 +102,22 @@ pub fn init_bare_from_directory(
         time,
     };
 
+    let bare_repo = gix::init_bare(&dest_path)
+        .map_err(|e| AppError::Init(e.to_string()))?;
+
+    let tree_id = write_directory_as_tree(&bare_repo, source)?;
+
     let commit = Commit {
         tree: tree_id,
         parents: Default::default(),
         author: sig.clone(),
-        committer: sig,
+        committer: sig.clone(),
         encoding: None,
         message: "Initial commit\n".into(),
         extra_headers: vec![],
     };
 
-    let commit_id = repo
+    let commit_id = bare_repo
         .write_object(&commit)
         .map_err(|e| AppError::Init(e.to_string()))?
         .detach();
@@ -130,12 +132,91 @@ pub fn init_bare_from_directory(
     let head_path = dest_path.join("HEAD");
     std::fs::write(&head_path, "ref: refs/heads/master\n")?;
 
+    init_local_repo(source, &dest_path, &sig)?;
+
     Ok(AddRepoResult {
         source_path: source.to_string_lossy().to_string(),
         destination_path: dest_path.to_string_lossy().to_string(),
         repo_name: repo_name.to_string(),
         is_fork: false,
     })
+}
+
+fn init_local_repo(
+    source: &Path,
+    bare_repo_path: &Path,
+    sig: &Signature,
+) -> Result<(), AppError> {
+    let local_repo = gix::init(source)
+        .map_err(|e| AppError::Init(e.to_string()))?;
+
+    let local_tree_id = write_directory_as_tree(&local_repo, source)?;
+
+    let local_commit = Commit {
+        tree: local_tree_id,
+        parents: Default::default(),
+        author: sig.clone(),
+        committer: sig.clone(),
+        encoding: None,
+        message: "Initial commit\n".into(),
+        extra_headers: vec![],
+    };
+
+    let local_commit_id = local_repo
+        .write_object(&local_commit)
+        .map_err(|e| AppError::Init(e.to_string()))?
+        .detach();
+
+    let git_dir = source.join(".git");
+    let local_refs = git_dir.join("refs").join("heads");
+    std::fs::create_dir_all(&local_refs)?;
+    std::fs::write(
+        local_refs.join("master"),
+        format!("{}\n", local_commit_id),
+    )?;
+
+    let remote_url = bare_repo_path.to_string_lossy().replace('\\', "/");
+    let config_path = git_dir.join("config");
+    let existing_config = std::fs::read_to_string(&config_path)?;
+    std::fs::write(
+        &config_path,
+        format!(
+            "{}\n[remote \"origin\"]\n\turl = {}\n\tfetch = +refs/heads/*:refs/remotes/origin/*\n",
+            existing_config, remote_url
+        ),
+    )?;
+
+    Ok(())
+}
+
+fn add_remote_to_repo(
+    source: &Path,
+    bare_repo_path: &Path,
+) -> Result<(), AppError> {
+    let git_dir = source.join(".git");
+    if !git_dir.is_dir() {
+        return Ok(());
+    }
+
+    let config_path = git_dir.join("config");
+    let existing_config = std::fs::read_to_string(&config_path)?;
+
+    let remote_name = if existing_config.contains("[remote \"origin\"]") {
+        "usb"
+    } else {
+        "origin"
+    };
+
+    let remote_url = bare_repo_path.to_string_lossy().replace('\\', "/");
+    std::fs::write(
+        &config_path,
+        format!(
+            "{}\n[remote \"{}\"]\n\turl = {}\n\tfetch = +refs/heads/*:refs/remotes/{}/*\n",
+            existing_config, remote_name, remote_url, remote_name
+        ),
+    )?;
+
+    Ok(())
 }
 
 fn write_directory_as_tree(
@@ -254,6 +335,19 @@ mod tests {
         assert!(repo_path.join("objects").is_dir());
         assert!(repo_path.join("refs").is_dir());
         assert!(repo_path.join("refs").join("heads").join("master").is_file());
+
+        let local_git = source.path().join(".git");
+        assert!(local_git.is_dir(), "Local .git should be created");
+        assert!(
+            local_git.join("refs").join("heads").join("master").is_file(),
+            "Local master ref should exist"
+        );
+
+        let config = std::fs::read_to_string(local_git.join("config")).unwrap();
+        assert!(
+            config.contains("[remote \"origin\"]"),
+            "Remote origin should be configured"
+        );
     }
 
     #[test]

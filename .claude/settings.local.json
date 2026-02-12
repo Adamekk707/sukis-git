@@ -16,7 +16,11 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:www.mozilla.org)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebFetch(domain:spdx.org)"
+      "WebFetch(domain:spdx.org)",
+      "Bash(gh api:*)",
+      "Bash(curl:*)",
+      "Bash(node -e:*)",
+      "WebFetch(domain:docs.github.com)"
     ]
   }
 }
