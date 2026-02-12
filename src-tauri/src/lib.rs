@@ -30,6 +30,7 @@ pub fn run() {
             clone_repository,
             detect_source_directory,
             add_repository_to_usb,
+            remove_repository,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

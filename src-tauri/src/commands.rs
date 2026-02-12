@@ -124,6 +124,18 @@ pub async fn add_repository_to_usb(
 }
 
 #[tauri::command]
+pub async fn remove_repository(repo_path: String) -> Result<(), String> {
+    let path = PathBuf::from(&repo_path);
+    if !path.exists() {
+        return Err(format!("Path does not exist: {repo_path}"));
+    }
+
+    repository::open_bare_repo(&path).map_err(|e| e.to_string())?;
+
+    std::fs::remove_dir_all(&path).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
 pub async fn clone_repository(
     source_path: String,
     destination_dir: String,

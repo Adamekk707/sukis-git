@@ -53,6 +53,12 @@
       "retry": "Retry",
       "close": "Close"
     },
+    "removeRepo": {
+      "confirm": "Are you sure you want to remove this repository?",
+      "description": "This will permanently delete the bare repository from the USB device.",
+      "remove": "Remove",
+      "cancel": "Cancel"
+    },
     "addRepo": {
       "title": "Add Repository to USB",
       "sourceLabel": "Source Directory",

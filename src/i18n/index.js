@@ -22,7 +22,7 @@ export const messages = i18n("app", {
     scanDevice: "Scan Device",
   },
   header: {
-    title: "すきすぎっ",
+    title: "Suki's Git",
     toggleSidebar: "Toggle Sidebar",
   },
   common: {
@@ -62,6 +62,12 @@ export const messages = i18n("app", {
     errorTitle: "Error",
     retry: "Retry",
     close: "Close",
+  },
+  removeRepo: {
+    confirm: "Are you sure you want to remove this repository?",
+    description: "This will permanently delete the bare repository from the USB device.",
+    remove: "Remove",
+    cancel: "Cancel",
   },
   addRepo: {
     title: "Add Repository to USB",

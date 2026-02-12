@@ -53,6 +53,12 @@
       "retry": "再試行",
       "close": "閉じる"
     },
+    "removeRepo": {
+      "confirm": "このリポジトリを削除しますか？",
+      "description": "USBデバイスからベアリポジトリが完全に削除されます。",
+      "remove": "削除",
+      "cancel": "キャンセル"
+    },
     "addRepo": {
       "title": "USBにリポジトリを追加",
       "sourceLabel": "ソースディレクトリ",

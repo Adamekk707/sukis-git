@@ -540,6 +540,78 @@
   color: var(--color-accent);
 }
 
+.repo-remove-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.repo-item-row:hover .repo-remove-btn {
+  opacity: 1;
+}
+
+.repo-remove-btn:hover {
+  background-color: rgba(248, 81, 73, 0.15);
+  color: #f85149;
+}
+
+.repo-remove-confirm {
+  padding: 8px;
+  margin: 4px 0;
+  border-radius: var(--radius-sm);
+  background-color: rgba(248, 81, 73, 0.1);
+  border: 1px solid rgba(248, 81, 73, 0.25);
+}
+
+.repo-remove-confirm-text {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: #f85149;
+  margin-bottom: 4px;
+}
+
+.repo-remove-confirm-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.repo-remove-confirm-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.repo-remove-cancel-btn {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  background-color: var(--color-bg-hover);
+}
+
+.repo-remove-cancel-btn:hover {
+  background-color: var(--color-border-light);
+}
+
+.repo-remove-confirm-btn {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  background-color: rgba(248, 81, 73, 0.2);
+  color: #f85149;
+}
+
+.repo-remove-confirm-btn:hover {
+  background-color: rgba(248, 81, 73, 0.35);
+}
+
 /* Add Repo Modal */
 .add-repo-badge {
   display: inline-block;

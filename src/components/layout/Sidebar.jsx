@@ -1,6 +1,7 @@
 import { useStore } from "@nanostores/react";
 import { useSetAtom } from "jotai";
 import * as R from "ramda";
+import { invoke } from "@tauri-apps/api/core";
 import { useUsbDevices } from "../../hooks/useUsbDevices";
 import { useRefs } from "../../hooks/useRefs";
 import { useRepository } from "../../context/RepositoryContext";
@@ -12,12 +13,21 @@ export function Sidebar() {
   const t = useStore(messages);
   const setCloneModalRepo = useSetAtom(cloneModalRepoAtom);
   const setAddRepoModalOpen = useSetAtom(addRepoModalOpenAtom);
-  const { devices, isLoading: devicesLoading, scanDevice } = useUsbDevices();
+  const { devices, isLoading: devicesLoading, scanDevice, refresh } = useUsbDevices();
   const { selectedRepoPath, selectedRef, selectRepository, selectRef } = useRepository();
   const { branches, tags, isLoading: refsLoading } = useRefs(selectedRepoPath);
 
   const handleSelectRepository = (repo) => {
     selectRepository(R.prop("path", repo));
+  };
+
+  const handleRemoveRepository = async (repoPath) => {
+    R.when(
+      R.equals(repoPath),
+      () => selectRepository(null),
+    )(selectedRepoPath);
+    await invoke("remove_repository", { repoPath });
+    refresh();
   };
 
   const isRefSelected = (ref) =>
@@ -46,6 +56,7 @@ export function Sidebar() {
           onScanDevice={scanDevice}
           onSelectRepository={handleSelectRepository}
           onCloneRepository={setCloneModalRepo}
+          onRemoveRepository={handleRemoveRepository}
         />
       </section>
 
