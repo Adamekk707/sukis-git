@@ -51,7 +51,13 @@
       "clonedTo": "Cloned to:",
       "errorTitle": "Error",
       "retry": "Retry",
-      "close": "Close"
+      "close": "Close",
+      "validating_source": "Validating source repository...",
+      "preparing": "Preparing clone...",
+      "fetching": "Fetching objects...",
+      "checkout": "Checking out files...",
+      "complete": "Clone complete!",
+      "failed": "Clone failed"
     },
     "removeRepo": {
       "confirm": "Are you sure you want to remove this repository?",
@@ -76,7 +82,22 @@
       "addedTo": "Added to:",
       "errorTitle": "Error",
       "retry": "Retry",
-      "close": "Close"
+      "close": "Close",
+      "detecting_source": "Detecting source type...",
+      "fork_start": "Starting fork...",
+      "fork_validating": "Validating repository name...",
+      "fork_cloning_bare": "Creating bare clone...",
+      "fork_fetching": "Fetching objects...",
+      "fork_adding_remote": "Configuring remote...",
+      "fork_complete": "Fork complete!",
+      "init_start": "Initializing repository...",
+      "init_validating": "Validating repository name...",
+      "init_creating_bare": "Creating bare repository...",
+      "init_writing_tree": "Writing directory tree...",
+      "init_writing_commit": "Writing initial commit...",
+      "init_creating_local": "Setting up local repository...",
+      "init_complete": "Repository created!",
+      "failed": "Operation failed"
     }
   }
 }

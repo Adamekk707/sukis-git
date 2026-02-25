@@ -51,7 +51,13 @@
       "clonedTo": "クローン先:",
       "errorTitle": "エラー",
       "retry": "再試行",
-      "close": "閉じる"
+      "close": "閉じる",
+      "validating_source": "ソースリポジトリを検証中...",
+      "preparing": "クローンを準備中...",
+      "fetching": "オブジェクトを取得中...",
+      "checkout": "ファイルをチェックアウト中...",
+      "complete": "クローン完了！",
+      "failed": "クローン失敗"
     },
     "removeRepo": {
       "confirm": "このリポジトリを削除しますか？",
@@ -76,7 +82,22 @@
       "addedTo": "追加先:",
       "errorTitle": "エラー",
       "retry": "再試行",
-      "close": "閉じる"
+      "close": "閉じる",
+      "detecting_source": "ソースタイプを検出中...",
+      "fork_start": "フォークを開始...",
+      "fork_validating": "リポジトリ名を検証中...",
+      "fork_cloning_bare": "ベアクローンを作成中...",
+      "fork_fetching": "オブジェクトを取得中...",
+      "fork_adding_remote": "リモートを設定中...",
+      "fork_complete": "フォーク完了！",
+      "init_start": "リポジトリを初期化中...",
+      "init_validating": "リポジトリ名を検証中...",
+      "init_creating_bare": "ベアリポジトリを作成中...",
+      "init_writing_tree": "ディレクトリツリーを書き込み中...",
+      "init_writing_commit": "初期コミットを書き込み中...",
+      "init_creating_local": "ローカルリポジトリをセットアップ中...",
+      "init_complete": "リポジトリ作成完了！",
+      "failed": "操作失敗"
     }
   }
 }

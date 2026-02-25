@@ -1,6 +1,9 @@
 use std::path::PathBuf;
 
+use tauri::AppHandle;
+
 use crate::git::{clone, dag, diff, init, log, refs, repository};
+use crate::progress::emit_error;
 use crate::types::{AddRepoResult, CloneResult, CommitDag, CommitInfo, CommitLogPage, RefInfo, RepositoryInfo, SourceDetection, UsbDevice};
 use crate::usb::detect;
 
@@ -106,6 +109,7 @@ pub async fn detect_source_directory(source_path: String) -> Result<SourceDetect
 
 #[tauri::command]
 pub async fn add_repository_to_usb(
+    app_handle: AppHandle,
     source_path: String,
     destination_dir: String,
     repo_name: String,
@@ -115,10 +119,18 @@ pub async fn add_repository_to_usb(
 
     match init::detect_source_type(&source) {
         init::SourceType::GitRepo => {
-            init::fork_repo_as_bare(&source, &dest, &repo_name).map_err(|e| e.to_string())
+            init::fork_repo_as_bare(&source, &dest, &repo_name, Some(&app_handle))
+                .map_err(|e| {
+                    emit_error(Some(&app_handle), "add-repo-progress", "addRepo.failed");
+                    e.to_string()
+                })
         }
         init::SourceType::PlainDirectory => {
-            init::init_bare_from_directory(&source, &dest, &repo_name).map_err(|e| e.to_string())
+            init::init_bare_from_directory(&source, &dest, &repo_name, Some(&app_handle))
+                .map_err(|e| {
+                    emit_error(Some(&app_handle), "add-repo-progress", "addRepo.failed");
+                    e.to_string()
+                })
         }
     }
 }
@@ -137,11 +149,16 @@ pub async fn remove_repository(repo_path: String) -> Result<(), String> {
 
 #[tauri::command]
 pub async fn clone_repository(
+    app_handle: AppHandle,
     source_path: String,
     destination_dir: String,
     repo_name: Option<String>,
 ) -> Result<CloneResult, String> {
     let source = PathBuf::from(&source_path);
     let dest = PathBuf::from(&destination_dir);
-    clone::clone_bare_to_local(&source, &dest, repo_name.as_deref()).map_err(|e| e.to_string())
+    clone::clone_bare_to_local(&source, &dest, repo_name.as_deref(), Some(&app_handle))
+        .map_err(|e| {
+            emit_error(Some(&app_handle), "clone-progress", "clone.failed");
+            e.to_string()
+        })
 }

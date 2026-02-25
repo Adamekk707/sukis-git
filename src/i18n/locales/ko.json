@@ -51,7 +51,13 @@
       "clonedTo": "복제 위치:",
       "errorTitle": "오류",
       "retry": "재시도",
-      "close": "닫기"
+      "close": "닫기",
+      "validating_source": "원본 리포지토리 검증 중...",
+      "preparing": "복제 준비 중...",
+      "fetching": "오브젝트 가져오는 중...",
+      "checkout": "파일 체크아웃 중...",
+      "complete": "복제 완료!",
+      "failed": "복제 실패"
     },
     "removeRepo": {
       "confirm": "이 리포지토리를 제거하시겠습니까?",
@@ -76,7 +82,22 @@
       "addedTo": "추가 위치:",
       "errorTitle": "오류",
       "retry": "재시도",
-      "close": "닫기"
+      "close": "닫기",
+      "detecting_source": "소스 타입 감지 중...",
+      "fork_start": "포크 시작...",
+      "fork_validating": "리포지토리 이름 검증 중...",
+      "fork_cloning_bare": "Bare 복제 생성 중...",
+      "fork_fetching": "오브젝트 가져오는 중...",
+      "fork_adding_remote": "리모트 설정 중...",
+      "fork_complete": "포크 완료!",
+      "init_start": "리포지토리 초기화 중...",
+      "init_validating": "리포지토리 이름 검증 중...",
+      "init_creating_bare": "Bare 리포지토리 생성 중...",
+      "init_writing_tree": "디렉토리 트리 기록 중...",
+      "init_writing_commit": "초기 커밋 기록 중...",
+      "init_creating_local": "로컬 리포지토리 설정 중...",
+      "init_complete": "리포지토리 생성 완료!",
+      "failed": "작업 실패"
     }
   }
 }

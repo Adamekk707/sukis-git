@@ -20,7 +20,17 @@
       "Bash(gh api:*)",
       "Bash(curl:*)",
       "Bash(node -e:*)",
-      "WebFetch(domain:docs.github.com)"
+      "WebFetch(domain:docs.github.com)",
+      "Bash(tail:*)",
+      "Bash(head:*)",
+      "Bash(find:*)",
+      "Bash(cd /c/Users/dohye/workspace/sukis-git/src-tauri && cargo clean 2>&1 && cargo test 2>&1)",
+      "Bash(echo dumpbin not found, trying alternatives:*)",
+      "Bash(exit:*)",
+      "Bash(cd /c/Users/dohye/workspace/sukis-git/src-tauri && target/debug/deps/sukis_git_lib-31b0c7ff9f3ab484.exe --test-threads=1 2>&1)",
+      "Bash(cd /c/Users/dohye/workspace/sukis-git/src-tauri && target/debug/deps/sukis_git_lib-31b0c7ff9f3ab484.exe 2>&1)",
+      "Bash(cd /c/Users/dohye/workspace/sukis-git/src-tauri && ls -la target/debug/deps/sukis_git_lib-*.exe 2>&1)",
+      "Bash(wc:*)"
     ]
   }
 }

@@ -90,6 +90,13 @@ pub struct SourceDetection {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ProgressEvent {
+    pub step: String,
+    pub is_error: bool,
+    pub detail: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UsbDevice {
     pub label: String,
     pub mount_point: String,

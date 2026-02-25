@@ -1,6 +1,7 @@
 mod commands;
 mod error;
 mod git;
+mod progress;
 mod types;
 mod usb;
 

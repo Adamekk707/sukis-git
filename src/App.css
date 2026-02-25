@@ -631,3 +631,45 @@
   color: #d29922;
 }
 
+/* Progress Log */
+.progress-log {
+  max-height: 160px;
+  overflow-y: auto;
+  margin-top: 8px;
+  padding: 8px;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+}
+
+.progress-log-entry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  color: var(--color-text-secondary);
+}
+
+.progress-log-entry-detail {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.progress-log-entry-error {
+  color: #f85149;
+}
+
+.progress-log-dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+.progress-log-dot-error {
+  background-color: #f85149;
+}
+

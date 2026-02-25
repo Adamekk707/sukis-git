@@ -1,16 +1,24 @@
 import * as R from "ramda";
 
-export function Modal({ isOpen, onClose, title, children }) {
+export function Modal({ isOpen, onClose, closeable = true, title, children }) {
   return R.when(
     R.identity,
     () => (
-      <div className="modal-backdrop" onClick={onClose}>
+      <div
+        className="modal-backdrop"
+        onClick={R.when(R.always(closeable), onClose)}
+      >
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
           <div className="modal-header">
             <h2 className="modal-title">{title}</h2>
-            <button className="modal-close-btn" onClick={onClose}>
-              &times;
-            </button>
+            {R.when(
+              R.identity,
+              () => (
+                <button className="modal-close-btn" onClick={onClose}>
+                  &times;
+                </button>
+              ),
+            )(closeable)}
           </div>
           <div className="modal-body">{children}</div>
         </div>

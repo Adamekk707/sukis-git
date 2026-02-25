@@ -8,7 +8,9 @@ import { mutate } from "swr";
 import { addRepoModalOpenAtom } from "../../atoms/uiAtoms";
 import { messages } from "../../i18n";
 import { SWR_KEYS } from "../../lib/swr";
+import { useProgressLog } from "../../hooks/useProgressLog";
 import { Modal } from "../common/Modal";
+import { ProgressLog } from "../common/ProgressLog";
 
 const IDLE = "idle";
 const DETECTING = "detecting";
@@ -28,6 +30,7 @@ export function AddRepoModal() {
   const [addState, setAddState] = useState(IDLE);
   const [errorMessage, setErrorMessage] = useState("");
   const [addResult, setAddResult] = useState(null);
+  const { logEntries, clearLog } = useProgressLog("add-repo-progress", R.equals(ADDING, addState));
 
   const handleClose = () => {
     setIsOpen(false);
@@ -38,6 +41,7 @@ export function AddRepoModal() {
     setAddState(IDLE);
     setErrorMessage("");
     setAddResult(null);
+    clearLog();
   };
 
   const handlePickSource = async () => {
@@ -101,6 +105,7 @@ export function AddRepoModal() {
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
+      closeable={R.not(R.equals(ADDING, addState))}
       title={R.pathOr("Add Repository to USB", ["addRepo", "title"], t)}
     >
       <div className="clone-field">
@@ -233,6 +238,7 @@ export function AddRepoModal() {
         )],
         [R.T, R.always(null)],
       ])(addState)}
+      <ProgressLog entries={logEntries} />
     </Modal>
   );
 }

@@ -6,7 +6,9 @@ import { invoke } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-dialog";
 import { cloneModalRepoAtom } from "../../atoms/uiAtoms";
 import { messages } from "../../i18n";
+import { useProgressLog } from "../../hooks/useProgressLog";
 import { Modal } from "../common/Modal";
+import { ProgressLog } from "../common/ProgressLog";
 
 const IDLE = "idle";
 const CLONING = "cloning";
@@ -22,6 +24,7 @@ export function CloneModal() {
   const [cloneResult, setCloneResult] = useState(null);
 
   const isOpen = R.complement(R.isNil)(repo);
+  const { logEntries, clearLog } = useProgressLog("clone-progress", R.equals(CLONING, cloneState));
 
   const handleClose = () => {
     setRepo(null);
@@ -29,6 +32,7 @@ export function CloneModal() {
     setCloneState(IDLE);
     setErrorMessage("");
     setCloneResult(null);
+    clearLog();
   };
 
   const handlePickDirectory = async () => {
@@ -65,6 +69,7 @@ export function CloneModal() {
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
+      closeable={R.not(R.equals(CLONING, cloneState))}
       title={R.pathOr("Clone Repository", ["clone", "title"], t)}
     >
       <div className="clone-field">
@@ -134,6 +139,7 @@ export function CloneModal() {
         )],
         [R.T, R.always(null)],
       ])(cloneState)}
+      <ProgressLog entries={logEntries} />
     </Modal>
   );
 }
